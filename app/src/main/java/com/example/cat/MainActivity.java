@@ -2,6 +2,7 @@ package com.example.cat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +18,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private int PuntosJugador1 = 0;
     private TextView textViewJugador1;
     private TextView textViewJugador2;
-
+    public MediaPlayer ring;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         textViewJugador1 = (TextView) findViewById(R.id.jugador1);
         textViewJugador2 = (TextView) findViewById(R.id.jugador2);
@@ -48,14 +51,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btn9.setOnClickListener(this);
         reset.setOnClickListener(this);
         again.setOnClickListener(this);
+        ring = MediaPlayer.create(MainActivity.this, R.raw.relajante);
+        ring.start();
 
     }
+
+
 
     @Override
     public void onClick(View view) {
         contador++;
+
         switch (view.getId())
         {
+
             case R.id.btn_1:
                 if (btn1.getText().toString().equals("")) {
                     if (chances == 0) {
@@ -163,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         chances = 0;
                         btn8.setText("X");
                         resultado();
+
                     }
                 }
                 break;
@@ -194,6 +204,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btn7.setText("");
                 btn8.setText("");
                 btn9.setText("");
+                btn1.setEnabled(true);
+                btn2.setEnabled(true);
+                btn3.setEnabled(true);
+                btn4.setEnabled(true);
+                btn5.setEnabled(true);
+                btn6.setEnabled(true);
+                btn7.setEnabled(true);
+                btn8.setEnabled(true);
+                btn9.setEnabled(true);
+                contador=0;
                 textViewJugador1.setText("Jugador(X): 0");
                 textViewJugador2.setText("Jugador(O): 0");
                 break;
